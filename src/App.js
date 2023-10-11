@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Admin from "./pages/admin";
 import Edit from "./pages/edit";
+import Report from "./pages/reports";
 import Menu from "./pages/menu";
 import Table from "./pages/table";
 import Checkout from "./pages/checkout";
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/reports" element={<Report />} />
           <Route path="/admin/edit" element={<Edit />} />
           <Route path="/table/:tablenumber/menu" element={<Menu />} />
           <Route path="/table/:tablenumber" element={<Table />} />

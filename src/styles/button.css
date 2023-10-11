@@ -9,6 +9,33 @@ button {
     margin-bottom: 10px; /* Add margin to separate each product */
     border-radius: 25px;
   }
+  .report {
+    display:flex;
+    flex-direction: row;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
+  }
+  .order-details {
+    display: flex;
+    flex-direction:column;
+    border: 1px solid #ccc; /* Add border with color */
+    padding: 10px; /* Add padding for better spacing */
+    margin-bottom: 10px; /* Add margin to separate each product */
+    border-radius: 25px;
+  }
+  
+  .left-content {
+    flex: 1; /* This will make the left content take most of the available space */
+  }
+
+  .right-content {
+    flex: 1; /* This will make the left content take most of the available space */
+  }
+  
+  
   
 
   .button-container {
@@ -111,4 +138,28 @@ button {
    }
    
 
+   .report-figures {
+    display:flex;
+    flex-direction: row;
+  }
    
+
+  .sales {
+    display:flex;
+    flex-direction: column;
+    border: 1px solid #ccc; /* Add border with color */
+    padding: 10px; /* Add padding for better spacing */
+    margin-bottom: 10px; /* Add margin to separate each product */
+    border-radius: 25px;
+    text-align: center;
+  }
+
+  .daily-report{
+    display:flex;
+    flex-direction: column;
+    border: 1px solid #ccc; /* Add border with color */
+    padding: 10px;
+    margin-top: 50px; /* Add padding for better spacing */
+    margin-bottom: 50px; /* Add margin to separate each product */
+    border-radius: 25px;
+  }

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { InputGroup, FormControl, Form } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import axios from 'axios';
-import { Link, useLocation } from "react-router-dom";
 const Edit = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [itemName, setItemName] = useState('');
   const [itemPrice, setItemPrice] = useState('');
-  const location = useLocation();
   const [itemDescription, setItemDescription] = useState('');
   const [editItemIndex, setEditItemIndex] = useState(null);
 
@@ -44,7 +43,7 @@ const Edit = () => {
     setEditItemIndex(index);
   };
 
-  const handleEditSubmit = async (event, i,itemID) => {
+  const handleEditSubmit = async (event, itemID) => {
     event.preventDefault();
     try {
       // Update item logic here using the index 'i'
@@ -60,6 +59,7 @@ const Edit = () => {
       setItemDescription('');
       console.log('Item updated successfully');
       setEditItemIndex(null);
+      window.location.href = "/admin/edit";
     } catch (error) {
       console.error('Failed to update item:', error);
     }
@@ -78,15 +78,10 @@ const Edit = () => {
     }
   };
 
-  const handleChange = (e, i) => {
-
-    setItemName(menuItems[i]?.name || '');
-    setItemPrice(menuItems[i]?.price || '');
-    setItemDescription(menuItems[i]?.desc || '');
-  };
 
   return (
     <div className="bg-dark text-white mb-3">
+      <button className="btn"><Link to="/admin/reports">View Reports</Link></button>
       <h1>Edit Menu</h1>
       <form onSubmit={handleAddItem}>
         <div className="container mt-5">
@@ -141,12 +136,15 @@ const Edit = () => {
             <div>
               <button onClick={() => handleEdit(index)}>Edit</button>
               {editItemIndex === index && (
-                <div>
+                <form onSubmit={(e) => handleEditSubmit(e, item._id)}>
+                <div className="container mt-5">
+                  <h2>Add Item</h2>
                   <div className="row">
                     <div className="col-sm-3">
-                      <InputGroup onChange={(e) => handleChange(e, index)} className="mb-3">
+                      <InputGroup className="mb-3">
                         <InputGroup.Text id="inputGroup-sizing-default">Item Name</InputGroup.Text>
                         <FormControl
+                          value={itemName}
                           onChange={(e) => setItemName(e.target.value)}
                           aria-label="Default"
                           aria-describedby="inputGroup-sizing-default"
@@ -154,10 +152,11 @@ const Edit = () => {
                       </InputGroup>
                     </div>
                     <div className="col-sm-3">
-                      <InputGroup onChange={(e) => handleChange(e, index)} className="mb-3">
+                      <InputGroup className="mb-3">
                         <InputGroup.Text>&#8377;</InputGroup.Text>
                         <Form.Control
                           type="number"
+                          value={itemPrice}
                           onChange={(e) => setItemPrice(e.target.value)}
                           aria-label="Amount (to the nearest dollar)"
                         />
@@ -166,19 +165,21 @@ const Edit = () => {
                     </div>
                   </div>
                   <div className="col-sm-6">
-                    <InputGroup onChange={(e) => handleChange(e, index)}>
+                    <InputGroup>
                       <InputGroup.Text>Description</InputGroup.Text>
                       <Form.Control
+                        value={itemDescription}
                         onChange={(e) => setItemDescription(e.target.value)}
                         as="textarea"
                         aria-label="With textarea"
                       />
                     </InputGroup>
                   </div>
-                  <button className="btn mt-3" type="submit" onClick={(e) => handleEditSubmit(e, index, item._id)}>
-                    Update item
+                  <button className="btn mt-3" type="submit">
+                    Update Item
                   </button>
                 </div>
+              </form>
               )}
             </div>
             <span>
